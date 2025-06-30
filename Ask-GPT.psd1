@@ -20,7 +20,10 @@
             Tags = @('OpenAI', 'GPT', 'AI', 'Chat', 'API', 'PowerShell')
             
             # A URL to the license for this module
-            LicenseUri = 'https://github.com/stimpy77/ask-gpt/blob/main/LICENSE'
+            LicenseUri = 'https://github.com/stimpy77/Ask-GPT/blob/main/LICENSE'
+            
+            # License expression or path to license file
+            License = 'MIT'
             
             # A URL to the main website for this project
             ProjectUri = 'https://github.com/stimpy77/ask-gpt'

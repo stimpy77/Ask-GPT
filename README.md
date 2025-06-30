@@ -16,6 +16,27 @@ Import-Module /path/to/Ask-GPT.psm1
 ```
 
 ## Usage
+
+### Piping to GPT
+
+To pipe input directly to Ask-GPT:
+
+```bash
+echo "what is 2+2?" | Ask-GPT
+```
+
+To use the shorter `gpt` alias for piping, first set up an alias in your shell:
+
+```bash
+alias gpt='Ask-GPT'
+```
+
+Then you can pipe to the alias:
+
+```bash
+echo "what is 2+2?" | gpt
+```
+
 Example command to query GPT:
 
 ```powershell
