@@ -28,7 +28,7 @@ echo "what is 2+2?" | Ask-GPT
 To use the shorter `gpt` alias for piping, first set up an alias in your shell:
 
 ```bash
-alias gpt='Ask-GPT'
+Set-Alias -Name gpt -Value Ask-GPT
 ```
 
 Then you can pipe to the alias:
