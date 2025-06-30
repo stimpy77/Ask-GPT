@@ -1,0 +1,35 @@
+# PowerShell Module .gitignore
+
+# Ignore PSScriptAnalyzer custom settings (if any)
+PSScriptAnalyzerSettings.psd1
+
+# Ignore temporary files
+*.tmp
+*.temp
+*.bak
+
+# Ignore build/deployment artifacts
+*.nupkg
+*.tgz
+dist/
+build/
+packages/
+
+# Ignore logs
+*.log
+
+# Ignore IDE configuration (for common editors)
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore operating system files
+.DS_Store
+Thumbs.db
+
+# Ignore any secrets if you have any
+# secrets.json
+
