@@ -317,15 +317,22 @@ function Ask-GPT {
                     Write-Error "Model '$Model' not found. Please check the model name and try again."
                     return
                 } else {
-                    # Try to get the actual error response
-                    try {
-                        $errorStream = $_.Exception.Response.GetResponseStream()
-                        $errorReader = [System.IO.StreamReader]::new($errorStream)
-                        $errorBody = $errorReader.ReadToEnd()
-                        $errorReader.Close()
-                        Write-Error "API Error: $errorBody"
-                    } catch {
-                        Write-Error "Error occurred during the request: $_"
+                    # Extract error details from the exception
+                    $errorMessage = $_.Exception.Message
+                    
+                    # Try to get more detailed error information
+                    if ($_.ErrorDetails -and $_.ErrorDetails.Message) {
+                        Write-Error "API Error: $($_.ErrorDetails.Message)"
+                    } elseif ($errorMessage -match '\{.*\}') {
+                        # Extract JSON from error message if present
+                        $jsonMatch = [regex]::Match($errorMessage, '\{.*\}')
+                        if ($jsonMatch.Success) {
+                            Write-Error "API Error: $($jsonMatch.Value)"
+                        } else {
+                            Write-Error "Error occurred during the request: $errorMessage"
+                        }
+                    } else {
+                        Write-Error "Error occurred during the request: $errorMessage"
                     }
                     return
                 }
