@@ -137,7 +137,9 @@ function Ask-GPT {
                     $_.id -notlike "*transcri*" -and
                     $_.id -notlike "*nano*" -and
                     $_.id -notlike "*mini*" -and
-                    $_.id -notlike "*preview*"
+                    $_.id -notlike "*preview*" -and
+                    $_.id -notlike "*realtime*" -and
+                    $_.id -notlike "*instruct*"
                 }
                 
                 # Sort by created timestamp (descending) and take the first one
@@ -148,15 +150,17 @@ function Ask-GPT {
                     $defaultModelUsed = $false
                     if ($ModelOrig -eq "auto") { [Console]::WriteLine("(Model: $Model)") }
                 } else {
-                    Write-Verbose "No suitable models found, using default"
-                    $Model = $DEFAULT_MODEL
-                    $defaultModelUsed = $true
+                    Write-Verbose "No suitable models found, using gpt-4o as fallback"
+                    $Model = "gpt-4o"
+                    $defaultModelUsed = $false
+                    if ($ModelOrig -eq "auto") { [Console]::WriteLine("(Model: $Model)") }
                 }
             } catch {
-                Write-Verbose "Error detecting models, using default"
+                Write-Verbose "Error detecting models, using gpt-4o as fallback"
                 Write-Verbose "Error: $_"
-                $Model = $DEFAULT_MODEL
-                $defaultModelUsed = $true
+                $Model = "gpt-4o"
+                $defaultModelUsed = $false
+                if ($ModelOrig -eq "auto") { [Console]::WriteLine("(Model: $Model)") }
             }
         }
         
@@ -175,7 +179,12 @@ function Ask-GPT {
         }
         $apiUrl = "https://api.openai.com/v1/chat/completions"
         $headers = @{ "Authorization" = "Bearer $apiKey"; "Content-Type" = "application/json" }
-        $bodyObject = @{ messages = @(); model = $Model; temperature=$Temperature; }
+        $bodyObject = @{ messages = @(); model = $Model; }
+        
+        # GPT-5 only supports default temperature (1), other models support custom temperature
+        if ($Model -notlike "gpt-5*") {
+            $bodyObject['temperature'] = $Temperature
+        }
 
         if ($RememberHistory) {
             #echo "Remembering gpt history"
@@ -224,7 +233,13 @@ function Ask-GPT {
         $body = $bodyObject | ConvertTo-Json
         #echo $body
 
-        if ($Stream) {
+        # GPT-5 requires organization verification for streaming, fall back to non-streaming
+        $useStreaming = $Stream
+        if ($Model -like "gpt-5*" -and $Stream) {
+            $useStreaming = $false
+        }
+        
+        if ($useStreaming) {
             try {
                 $bodyObject["stream"] = $true
                 $body = $bodyObject | ConvertTo-Json
@@ -282,17 +297,37 @@ function Ask-GPT {
                 $reader.Close()
                 $response.Close()
             } catch [System.Net.WebException] {
-                Write-Error "Error occurred during the request: $_"
+                $errorResponse = $_.Exception.Response
+                if ($errorResponse) {
+                    $errorStream = $errorResponse.GetResponseStream()
+                    $errorReader = [System.IO.StreamReader]::new($errorStream)
+                    $errorBody = $errorReader.ReadToEnd()
+                    $errorReader.Close()
+                    Write-Error "Error occurred during the request: $errorBody"
+                } else {
+                    Write-Error "Error occurred during the request: $_"
+                }
             }
         } else {
         
             try {
                 $response = Invoke-RestMethod -Uri $apiUrl -Method Post -Headers $headers -Body $body
-            } catch [System.Net.WebException] {
-                if ($_.Exception.Response.StatusCode -eq 404) {
+            } catch {
+                if ($_.Exception.Response -and $_.Exception.Response.StatusCode -eq 404) {
                     Write-Error "Model '$Model' not found. Please check the model name and try again."
+                    return
                 } else {
-                    throw $_
+                    # Try to get the actual error response
+                    try {
+                        $errorStream = $_.Exception.Response.GetResponseStream()
+                        $errorReader = [System.IO.StreamReader]::new($errorStream)
+                        $errorBody = $errorReader.ReadToEnd()
+                        $errorReader.Close()
+                        Write-Error "API Error: $errorBody"
+                    } catch {
+                        Write-Error "Error occurred during the request: $_"
+                    }
+                    return
                 }
             }
             $responseContent = $response.choices[0].message.content
