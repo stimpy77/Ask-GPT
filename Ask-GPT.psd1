@@ -1,6 +1,6 @@
 @{
     # Module manifest for Ask-GPT
-    ModuleVersion = '1.0.2'
+    ModuleVersion = '1.0.4'
     GUID = 'b8c5e8a0-4d1a-4a7e-9b2c-3f4d5e6a7b8c'
     Author = 'stimpy77'
     CompanyName = 'Unknown'
@@ -30,7 +30,7 @@
             
             # ReleaseNotes of this module
             ReleaseNotes = @'
-Version 1.0.2: Major fixes and GPT-5 support
+Version 1.0.4: Major fixes and GPT-5 support
 - Fixed GPT-5 compatibility: Handle temperature restrictions (GPT-5 only supports default temperature)
 - Fixed GPT-5 streaming: Auto-fallback to non-streaming for unverified organizations
 - Improved error handling with detailed API error messages
