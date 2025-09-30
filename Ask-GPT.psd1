@@ -12,6 +12,7 @@
     AliasesToExport = @('gpt')
     CmdletsToExport = @()
     VariablesToExport = @()
+    FileList = @('Ask-GPT.psd1', 'Ask-GPT.psm1', 'LICENSE', 'README.md', 'CHANGELOG.md')
     
     # Private data to pass to the module specified in RootModule/ModuleToProcess
     PrivateData = @{

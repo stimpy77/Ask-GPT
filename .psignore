@@ -1,0 +1,4 @@
+Update-Version.ps1
+GALLERY_PREP.md
+.gitignore
+.psignore

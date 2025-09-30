@@ -33,3 +33,7 @@ Thumbs.db
 # Ignore any secrets if you have any
 # secrets.json
 
+# Ignore helper scripts not needed in published module
+Update-Version.ps1
+GALLERY_PREP.md
+
