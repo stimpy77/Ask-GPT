@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.6] - 2025-09-30
+
+### Changed
+- Exclude codex models from automatic model selection to prevent gpt-5-codex from being auto-selected
+
+### Enhanced
+- Improved module description with examples, features, and setup instructions for better PowerShell Gallery discoverability
+- Added comprehensive CHANGELOG entries documenting versions 1.0.2 through 1.0.5
+
 ## [1.0.5] - 2025-09-02
 
 ### Fixed

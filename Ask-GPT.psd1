@@ -1,6 +1,6 @@
 @{
     # Module manifest for Ask-GPT
-    ModuleVersion = '1.0.5'
+    ModuleVersion = '1.0.6'
     GUID = 'b8c5e8a0-4d1a-4a7e-9b2c-3f4d5e6a7b8c'
     Author = 'stimpy77'
     CompanyName = 'Unknown'
@@ -30,16 +30,15 @@
             
             # ReleaseNotes of this module
             ReleaseNotes = @'
+Version 1.0.6: Exclude codex models from auto-selection
+- Exclude codex models (e.g., gpt-5-codex) from automatic model selection
+- Enhanced module description with examples and features for better discoverability
+- Complete CHANGELOG documentation for versions 1.0.2 through 1.0.5
+
 Version 1.0.5: Error handling fix and GPT-5 support
 - Fixed GPT-5 compatibility: Handle temperature restrictions (GPT-5 only supports default temperature)
 - Fixed GPT-5 streaming: Auto-fallback to non-streaming for unverified organizations
 - Improved error handling with detailed API error messages
-- Better model filtering to exclude problematic models (realtime, instruct, etc.)
-- Enhanced model auto-detection with robust fallback to gpt-4o
-- Fixed temperature parameter handling for different model types
-- Improved ANSI escape sequence support for better terminal rendering
-- Fixed PowerShell compatibility issues in error handling (v1.0.5)
-- Better error message extraction from API responses
 '@
         }
     }
