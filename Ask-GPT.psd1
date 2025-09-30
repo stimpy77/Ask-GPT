@@ -5,7 +5,7 @@
     Author = 'stimpy77'
     CompanyName = 'Unknown'
     Copyright = '(c) 2025 stimpy77. All rights reserved.'
-    Description = 'A PowerShell module for interacting with OpenAI GPT models via command line interface.'
+    Description = 'Ask-GPT: Interactive OpenAI GPT integration for PowerShell`n`nEXAMPLES:`n  Ask-GPT "Explain PowerShell arrays"`n  "What is 2+2?" | Ask-GPT`n  Ask-GPT -Model gpt-4 "Fix this code"`n`nFEATURES:`n  • Streaming responses to console`n  • Conversation history management`n  • All GPT models (GPT-5, GPT-4, GPT-3.5-turbo)`n  • Pipeline support for PowerShell workflows`n  • Temperature control and ANSI formatting`n`nSETUP:`n  Set-Item env:OPENAI_API_KEY "your-api-key"`n`nPerfect for automation, scripting, code assistance, and interactive AI workflows.'
     PowerShellVersion = '7.0'
     RootModule = 'Ask-GPT.psm1'
     FunctionsToExport = @('Ask-GPT')

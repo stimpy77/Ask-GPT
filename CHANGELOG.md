@@ -5,6 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5] - 2025-09-02
+
+### Fixed
+- Fixed PowerShell compatibility issues in error handling
+- Replace problematic GetResponseStream() calls with PowerShell-compatible error handling
+- Use ErrorDetails.Message and regex parsing for better error extraction
+- Improve API error message display
+- Maintain compatibility across PowerShell versions
+
+## [1.0.4] - 2025-09-02
+
+### Changed
+- Bump version for PowerShell Gallery publication
+
+## [1.0.3] - 2025-07-05
+
+### Enhanced
+- Reformatted module description with proper line breaks using backtick-n
+- Added bullet points and clear sections for better PowerShell Gallery readability
+- Improved visual organization of examples, features, and setup instructions
+
+## [1.0.2] - 2025-09-02
+
+### Added
+- GPT-5 compatibility and improved error handling
+
+### Fixed
+- Fix GPT-5 temperature restrictions (only supports default temperature)
+- Fix GPT-5 streaming fallback for unverified organizations
+- Better model filtering to exclude problematic models (realtime, instruct, etc.)
+- Enhanced model auto-detection with robust fallback to gpt-4o
+- Improved ANSI escape sequence support
+
 ## [1.0.1] - 2025-07-05
 
 ### Fixed
