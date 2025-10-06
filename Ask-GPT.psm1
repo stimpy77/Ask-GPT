@@ -140,7 +140,8 @@ function Ask-GPT {
                     $_.id -notlike "*preview*" -and
                     $_.id -notlike "*realtime*" -and
                     $_.id -notlike "*instruct*" -and
-                    $_.id -notlike "*codex*"
+                    $_.id -notlike "*codex*" -and
+                    $_.id -notlike "*-pro*"
                 }
                 
                 # Sort by created timestamp (descending) and take the first one

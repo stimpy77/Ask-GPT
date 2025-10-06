@@ -1,6 +1,6 @@
 @{
     # Module manifest for Ask-GPT
-    ModuleVersion = '1.0.6'
+    ModuleVersion = '1.0.8'
     GUID = 'b8c5e8a0-4d1a-4a7e-9b2c-3f4d5e6a7b8c'
     Author = 'stimpy77'
     CompanyName = 'Unknown'
@@ -31,6 +31,12 @@
             
             # ReleaseNotes of this module
             ReleaseNotes = @'
+Version 1.0.8: Fix -pro model exclusion pattern
+- Fix -pro exclusion to use wildcard pattern (*-pro*) for broader matching
+
+Version 1.0.7: Exclude -pro suffix models from auto-selection
+- Exclude models ending with -pro suffix from automatic model selection
+
 Version 1.0.6: Exclude codex models from auto-selection
 - Exclude codex models (e.g., gpt-5-codex) from automatic model selection
 - Enhanced module description with examples and features for better discoverability
