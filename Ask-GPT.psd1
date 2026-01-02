@@ -1,6 +1,6 @@
 @{
     # Module manifest for Ask-GPT
-    ModuleVersion = '1.0.8'
+    ModuleVersion = '1.0.9'
     GUID = 'b8c5e8a0-4d1a-4a7e-9b2c-3f4d5e6a7b8c'
     Author = 'stimpy77'
     CompanyName = 'Unknown'
