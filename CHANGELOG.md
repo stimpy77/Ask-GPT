@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.10] - 2026-05-08
+
+### Fixed
+- Fallback from `OPENAI_PERSONAL_API_KEY` to `OPENAI_API_KEY` now works when the personal key is set to an empty string (previously only worked when the variable was truly unset)
+- Corrected error message to mention both supported environment variables
+
 ## [1.0.6] - 2025-09-30
 
 ### Changed

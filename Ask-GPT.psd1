@@ -1,6 +1,6 @@
 @{
     # Module manifest for Ask-GPT
-    ModuleVersion = '1.0.9'
+    ModuleVersion = '1.0.10'
     GUID = 'b8c5e8a0-4d1a-4a7e-9b2c-3f4d5e6a7b8c'
     Author = 'stimpy77'
     CompanyName = 'Unknown'
@@ -31,6 +31,10 @@
             
             # ReleaseNotes of this module
             ReleaseNotes = @'
+Version 1.0.10: Fix OPENAI_API_KEY fallback
+- Fallback from OPENAI_PERSONAL_API_KEY to OPENAI_API_KEY now works when the personal key is set to an empty string (previously only worked when the variable was truly unset)
+- Corrected error message to mention both supported environment variables
+
 Version 1.0.8: Fix -pro model exclusion pattern
 - Fix -pro exclusion to use wildcard pattern (*-pro*) for broader matching
 

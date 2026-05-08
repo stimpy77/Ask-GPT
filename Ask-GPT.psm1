@@ -108,13 +108,13 @@ function Ask-GPT {
         # Handle "auto" model selection
         if ($Model -eq "auto" -or $Model -eq "latest") {
             $ModelOrig = $Model
-            if ($null -eq $env:OPENAI_PERSONAL_API_KEY -and $null -eq $env:OPENAI_API_KEY) {
+            if ([string]::IsNullOrEmpty($env:OPENAI_PERSONAL_API_KEY) -and [string]::IsNullOrEmpty($env:OPENAI_API_KEY)) {
                 Write-Error "OPENAI_PERSONAL_API_KEY or OPENAI_API_KEY environment variable is required for auto model selection";
                 return
             }
-            
+
             $apiKey = $env:OPENAI_PERSONAL_API_KEY
-            if ($null -eq $apiKey) {
+            if ([string]::IsNullOrEmpty($apiKey)) {
                 $apiKey = $env:OPENAI_API_KEY
             }
             
@@ -171,13 +171,13 @@ function Ask-GPT {
             [Console]::WriteLine("(Model: $Model)") 
         }
 
-        if ($null -eq $env:OPENAI_PERSONAL_API_KEY -and $null -eq $env:OPENAI_API_KEY) {
-            Write-Error "OPENAI_PERSONAL_API_KEY environment variable is not defined";
+        if ([string]::IsNullOrEmpty($env:OPENAI_PERSONAL_API_KEY) -and [string]::IsNullOrEmpty($env:OPENAI_API_KEY)) {
+            Write-Error "OPENAI_PERSONAL_API_KEY or OPENAI_API_KEY environment variable is not defined";
             return
         }
 
         $apiKey = $env:OPENAI_PERSONAL_API_KEY
-        if ($null -eq $apiKey) {
+        if ([string]::IsNullOrEmpty($apiKey)) {
             $apiKey = $env:OPENAI_API_KEY
         }
         $apiUrl = "https://api.openai.com/v1/chat/completions"
